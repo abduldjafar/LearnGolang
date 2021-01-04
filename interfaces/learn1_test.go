@@ -1,15 +1,16 @@
 package interfaces
 
 import (
+	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 type DataTest struct {
-	react   React
-	ErrorMessageArea string
+	react                 React
+	ErrorMessageArea      string
 	ErrorMessagePerimeter string
-	ExpectationArea  float64
-	ExpectationPerimeter float64
+	ExpectationArea       float64
+	ExpectationPerimeter  float64
 }
 
 func TestReactArea(t *testing.T) {
@@ -19,20 +20,19 @@ func TestReactArea(t *testing.T) {
 				1.0,
 				2.0,
 			},
-			ExpectationArea:  2.0,
-			ErrorMessageArea: "the result is not 2.0",
-			ExpectationPerimeter: 4.0,
+			ExpectationArea:       2.0,
+			ErrorMessageArea:      "the result is not 2.0",
+			ExpectationPerimeter:  4.0,
 			ErrorMessagePerimeter: "the result is not 4.0",
-
 		},
 		DataTest{
 			react: React{
 				-1.0,
 				2.0,
 			},
-			ExpectationArea:  -2.0,
-			ErrorMessageArea: "the result is not -2.0",
-			ExpectationPerimeter: -4.0,
+			ExpectationArea:       -2.0,
+			ErrorMessageArea:      "the result is not -2.0",
+			ExpectationPerimeter:  -4.0,
 			ErrorMessagePerimeter: "the result is not -4.0",
 		},
 		DataTest{
@@ -40,18 +40,14 @@ func TestReactArea(t *testing.T) {
 				0.0,
 				0.0,
 			},
-			ExpectationArea:  0.0,
-			ErrorMessageArea: "the result is not 0.0",
-			ExpectationPerimeter: 0.0,
+			ExpectationArea:       0.0,
+			ErrorMessageArea:      "the result is not 0.0",
+			ExpectationPerimeter:  0.0,
 			ErrorMessagePerimeter: "the result is not 0.0",
 		},
 	}
-	for _,datas := range data{
-		if datas.react.Area() != datas.ExpectationArea {
-			t.Error(datas.ErrorMessageArea)
-		}
+	for _, datas := range data {
+		assert.Equal(t, datas.react.Area(), datas.ExpectationArea)
 	}
-
-
 
 }
